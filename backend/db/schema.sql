@@ -60,8 +60,6 @@ create table consent_log (
 );
 
 
-show tables;
-
 
 
 
