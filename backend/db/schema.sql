@@ -48,7 +48,9 @@ create table holdings(
     instrument_type Enum('stocks','mf'),
     quantity decimal(12,3),
     avg_buy_price decimal(12,2),
-    current_price decimal(12,2)
+    current_price decimal(12,2),
+    isin varchar(12),
+    folio_number varchar(30)
 );
 
 create table consent_log (
@@ -57,6 +59,16 @@ create table consent_log (
     consent_status ENUM ('pending','approved','rejected','expired'),
     requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     approved_at TIMESTAMP NULL
+);
+
+create table import_log (
+	import_id int auto_increment primary key,
+    account_id int,
+    foreign key (account_id) references accounts(account_id),
+    import_type ENUM('bank','stock','mf'),
+    number_rows_added int,
+    duplicate_rows int,
+    imported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
